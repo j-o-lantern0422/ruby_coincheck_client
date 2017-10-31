@@ -122,6 +122,19 @@ class CoincheckClient
     request_for_get(uri)
   end
 
+  def read_exchange_rate(order_type, pair: Pair::BTC_JPY)
+    body = {
+      order_type: order_type,
+      pair: pair,
+      amount: nil,
+      price: nil
+    }
+    
+    uri = URI.parse @@base_url + "/api/exchange/orders/rate"
+    body = body.to_json
+    request_for_get(uri, body)
+  end
+
   def read_order_books
     uri = URI.parse @@base_url + "api/order_books"
     request_for_get(uri)
